@@ -52,7 +52,7 @@ Tarjan 알고리즘은 $$G$$의 DFS 스패닝 트리에서 일부 트리 간선�
 한편 (b)의 경우에는 `DFS(5)`에서 교차 간선 $$(5,4)$$를 탐색 중이다. 이미 종료된 `DFS(2)`를 통해 $$4$$가 $$1$$과 같은 SCC에 속하는 것을 알고 있다. 따라서 $$5$$와 $$1$$은 같은 SCC에 속한다.
 
 ## Implementation 
-{%ace edit=false, lang='c_cpp'%}
+'''
 vector<int> sccId;
 vector<int> discovered;
 vector<int> adj[MAXV];
@@ -80,7 +80,7 @@ int dfs(int here) {
   }
   return ret;
 }
-{%endace%}
+'''
 
 ## Notations
 이 글에서 사용한 기호의 정의는 다음과 같다.  
