@@ -3,5 +3,4 @@
 * [Introduction](README.md)
 
 - Graph
-  - [Tarjan-SCC](posts/tarjan-scc.md)
-  
+  - [Tarjan's SCC Algorithm](posts/tarjan-scc.md)
