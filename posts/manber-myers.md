@@ -19,7 +19,7 @@
 |$$C_H^{-1}(i)$$ | $$C_H(x)=i$$일 때의 $$x$$ |
 |$$S_H(i)$$ | $$S[i...min(n-1,i+h-1)]$$ |
 |$$G_H(i)$$ | $$\{S_H(i) | 0 \leq i \leq n-1 \}$$ 에서 $$S_H(i)$$의 사전상 순서 (0-based) |
-|$$|G_H|$$ | $$|\{S_H(i) | 0 \leq i \leq n-1 \}|$$ |
+|$$\left\vert G_H\right\vert$$ | $$\{S_H(i) | 0 \leq i \leq n-1 \} 의 크기$$ |
 |$$\overset{\underset{\mathrm{H}}{}}{=}$$| $$i\overset{\underset{\mathrm{H}}{}}{=}j \iff S_H(i)=S_H(j)$$ (lexicographically equal)|  
 |$$\overset{\underset{\mathrm{H}}{}}{\neq}$$| $$i\overset{\underset{\mathrm{H}}{}}{\neq}j \iff S_H(i)<S_H(j) \lor S_H(i)>S_H(j)$$ (lexicographically not equal)|  
 |$$\overset{\underset{\mathrm{H}}{}}{<}$$| $$i\overset{\underset{\mathrm{H}}{}}{<}j \iff S_H(i)<S_H(j)$$ (lexicographically less) |
