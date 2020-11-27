@@ -80,7 +80,7 @@ $$G_H(i)=G_H(j) \land j\neq i \implies L(i)\geq H \land L(j)\geq H$$ 이어서 $
 서로 다른 두 접미사 $$x \in \mathbb{S}$$와 $$y \in \mathbb{S}$$에 대해 일반성을 잃지 않고 $$L(x)>L(y)$$라고 하자.
 이 때 $$x\overset{{\mathrm{H}}{}}{=}y$$인 경우만 고려해도 된다. 왜냐하면 $$x\overset{{\mathrm{H}}{}}{<}y \implies x\overset{{\mathrm{2H}}{}}{<}y$$이고,
 $$x\overset{{\mathrm{H}}{}}{>}y \implies x\overset{{\mathrm{2H}}{}}{>}y$$이기 때문에 이 때는 $$G_H$$가 제대로 주어져 있다면 $$x$$와 $$y$$에 대해서 $$C_{2H}^*$$도 제대로 정렬되기 때문이다.    
-또한 길이가 $$H$$보다 작은 접미사도 고려하지 않아도 된다. 그 이유는 **Lemma1.**에 의해 길이 $$H$$보다 짧은 접미사 $$z$$는 임의의 접미사 $$w$$에 대해 $$z\overset{{\mathrm{H}}{}}{\neq}w$$이기 때문이다. 따라서 $$x$$와 $$y$$에 대해 $$x+H\in \mathbb{S}\land y+H\in \mathbb{S}$$임을 알 수 있다. 이제 다음의 같이 세 가지 경우를 고려하자.
+또한 길이가 $$H$$보다 작은 접미사도 고려하지 않아도 된다. 그 이유는 **Lemma1**에 의해 길이 $$H$$보다 짧은 접미사 $$z$$는 임의의 접미사 $$w$$에 대해 $$z\overset{{\mathrm{H}}{}}{\neq}w$$이기 때문이다. 따라서 $$x$$와 $$y$$에 대해 $$x+H\in \mathbb{S}\land y+H\in \mathbb{S}$$임을 알 수 있다. 이제 다음의 같이 세 가지 경우를 고려하자.
 
 **Case1.** $$x\overset{{\mathrm{2H}}{}}{=}y$$인 경우.   
 $$
@@ -118,7 +118,7 @@ $$
 
 ## Calculation of $$T_H$$
 
-이제 **Themrem1.**의 조건을 만족하는 $$T_H$$를 계산하는 방법을 생각해 보자.
+이제 **Theorem1**의 조건을 만족하는 $$T_H$$를 계산하는 방법을 생각해 보자.
 
 > **Algorithm2. ($$T_H$$ calculation)**   
 Input: $$C_H$$   
@@ -132,7 +132,7 @@ $$\quad$$**if** $$C_H[i]\geq H$$ **then**
 $$\qquad T_H[curr] \gets C_H[i]-H$$   
 $$\qquad curr \gets curr+1$$   
    
-이 알고리즘이 올바르게 작동한다는 사실을 다음과 같이 알 수 있다.
+이 알고리즘이 올바르게 작동한다는 사실을 다음을 통해 알 수 있다.
 
 > **Theorem2. (Correctness)**  
 **Algorithm2**의 결과로 계산된 $$T_H$$는 **Theorem1**의 조건을 만족한다.
