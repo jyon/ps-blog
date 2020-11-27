@@ -9,6 +9,22 @@
 ## Notation
 이 글에서 사용할 기호들의 의미는 다음과 같다.
 
+| Symbol | Definition |
+|---|:---|
+|$$\mathbb{S}$$ | $$\mathbb{S}=[0, n-1]$$, 문자열 $$S[0...n-1]$$의 접미사들의 집합을 나타낸다. |
+|$$\mathbb{F}$$ | $$\mathbb{S} \mapsto \mathbb{S}$$ 이고 일대일 대응인 함수들의 집합  |
+|$$C(i)$$ | 접미사 배열의 $$i$$ 번째 값 |
+|$$C^{-1}(i)$$ | $$C(x)=i$$ 일 때 $$x$$ |
+|$$C_H(i)$$ | 접미사들을 앞에서부터 $$H$$ 글자를 기준으로 사전 순으로, 사전상 순서 같은 경우에는 긴 것 부터 나열했을 때, $$i$$번째 값 |
+|$$C_H^{-1}(i)$$ | $$C_H(x)=i$$일 때의 $$x$$ |
+|$$S_H(i)$$ | $$S[i...min(n-1,i+h-1)]$$ |
+|$$G_H(i)$$ | $$\{S_H(i) | 0 \leq i \leq n-1 \}$$ 에서 $$S_H(i)$$의 사전상 순서 (0-based) |
+|$$|G_H|$$ | $$|\{S_H(i) | 0 \leq i \leq n-1 \}|$$ |
+|$$\overset{{\mathrm{H}}{}}{=}$$| $$i\overset{{\mathrm{H}}{}}{=}j \iff S_H(i)=S_H(j)$$ (lexicographically equal)|  
+|$$\overset{{\mathrm{H}}{}}{\neq}$$| $$i\overset{{\mathrm{H}}{}}{\neq}j \iff S_H(i)<S_H(j) \lor S_H(i)>S_H(j)$$ (lexicographically not equal)|  
+|$$\overset{{\mathrm{H}}{}}{<}$$| $$i\overset{{\mathrm{H}}{}}{<}j \iff S_H(i)<S_H(j)$$ (lexicographically less) |
+|$$\overset{{\mathrm{H}}{}}{>}$$| $$i\overset{{\mathrm{H}}{}}{>}j \iff S_H(i)>S_H(j)$$ (lexicographically greater) |   
+
 $$\mathbb{F}$$에 속하는 함수들은 접미사에서 접미사로 대응되는 함수로 생각할 수 있다. 예를 들어 $$C_H \in \mathbb{F}$$ 이다. 한편, $$G_H$$는 구현상의 편의를 위해 $$[0, n]\mapsto \mathbb{Z}$$ 으로 생각하자.
 다음의 몇 가지 간단한 사실이 성립한다.
 > **Fact1.**   
@@ -18,9 +34,9 @@ $$C=C_N=C_{2^{\lceil \log_{2} N \rceil}}$$
 따라서 $$C_H$$를 구하는 과정을 최대 $$\lceil\log_{2} N\rceil$$번 수행하면 접미사 배열을 얻을 수 있다.
 
 > **Fact2.**   
-1. $$x\overset{\underset{\mathrm{H}}{}}{=}y \iff G_H(x)=G_H(y)$$   
-2. $$x\overset{\underset{\mathrm{H}}{}}{<}y \iff G_H(x)<G_H(y)$$   
-3. $$x\overset{\underset{\mathrm{H}}{}}{>}y \iff G_H(x)>G_H(y)$$   
+1. $$x\overset{{\mathrm{H}}{}}{=}y \iff G_H(x)=G_H(y)$$   
+2. $$x\overset{{\mathrm{H}}{}}{<}y \iff G_H(x)<G_H(y)$$   
+3. $$x\overset{{\mathrm{H}}{}}{>}y \iff G_H(x)>G_H(y)$$   
 
 **Proof.**  ∎
 
@@ -64,14 +80,14 @@ $$G_H(i)=G_H(j) \land j\neq i \implies L(i)\geq H \land L(j)\geq H$$ 이어서 $
    
 **Proof.**   
 서로 다른 두 접미사 $$x \in \mathbb{S}$$와 $$y \in \mathbb{S}$$에 대해 일반성을 잃지 않고 $$L(x)>L(y)$$라고 하자.
-이 때 $$x\overset{\underset{\mathrm{H}}{}}{=}y$$인 경우만 고려해도 된다. 왜냐하면 $$x\overset{\underset{\mathrm{H}}{}}{<}y \implies x\overset{\underset{\mathrm{2H}}{}}{<}y$$이고,
-$$x\overset{\underset{\mathrm{H}}{}}{>}y \implies x\overset{\underset{\mathrm{2H}}{}}{>}y$$이기 때문에 이 때는 $$G_H$$가 제대로 주어져 있다면 $$x$$와 $$y$$에 대해서 $$C_{2H}^*$$도 제대로 정렬되기 때문이다.    
-또한 길이가 $$H$$보다 작은 접미사도 고려하지 않아도 된다. 그 이유는 **Lemma1.**에 의해 길이 $$H$$보다 짧은 접미사 $$z$$는 임의의 접미사 $$w$$에 대해 $$z\overset{\underset{\mathrm{H}}{}}{\neq}w$$이기 때문이다. 따라서 $$x$$와 $$y$$에 대해 $$x+H\in \mathbb{S}\land y+H\in \mathbb{S}$$임을 알 수 있다. 이제 다음의 같이 세 가지 경우를 고려하자.
+이 때 $$x\overset{{\mathrm{H}}{}}{=}y$$인 경우만 고려해도 된다. 왜냐하면 $$x\overset{{\mathrm{H}}{}}{<}y \implies x\overset{{\mathrm{2H}}{}}{<}y$$이고,
+$$x\overset{{\mathrm{H}}{}}{>}y \implies x\overset{{\mathrm{2H}}{}}{>}y$$이기 때문에 이 때는 $$G_H$$가 제대로 주어져 있다면 $$x$$와 $$y$$에 대해서 $$C_{2H}^*$$도 제대로 정렬되기 때문이다.    
+또한 길이가 $$H$$보다 작은 접미사도 고려하지 않아도 된다. 그 이유는 **Lemma1.**에 의해 길이 $$H$$보다 짧은 접미사 $$z$$는 임의의 접미사 $$w$$에 대해 $$z\overset{{\mathrm{H}}{}}{\neq}w$$이기 때문이다. 따라서 $$x$$와 $$y$$에 대해 $$x+H\in \mathbb{S}\land y+H\in \mathbb{S}$$임을 알 수 있다. 이제 다음의 같이 세 가지 경우를 고려하자.
 
-**Case1.** $$x\overset{\underset{\mathrm{2H}}{}}{=}y$$인 경우.   
+**Case1.** $$x\overset{{\mathrm{2H}}{}}{=}y$$인 경우.   
 $$
 \begin{matrix}
-x\overset{\underset{\mathrm{2H}}{}}{=}y &\implies& x+H\overset{\underset{\mathrm{H}}{}}{=}y+H \\
+x\overset{{\mathrm{2H}}{}}{=}y &\implies& x+H\overset{{\mathrm{H}}{}}{=}y+H \\
                     &\implies& C_H^{-1}(x+H)<C_H^{-1}(y+H) & (\because C_H\mbox{ is already sorted})\\
                     &\implies& T_H^{-1}(x)<T_H^{-1}(y) & (\because \mbox{ by condition 3.})\\
                     &\implies& C_{2H}^{*-1}(x)<C_{2H}^{*-1}(y)   
@@ -80,20 +96,20 @@ $$
 
 **Note.**  $$L(x)>L(y)$$ 이므로 $$x$$가 먼저 나오는 것이 맞는 결과이다.   
 
-**Case2.** $$x\overset{\underset{\mathrm{2H}}{}}{<}y$$인 경우.   
+**Case2.** $$x\overset{{\mathrm{2H}}{}}{<}y$$인 경우.   
 $$
 \begin{matrix}
-x\overset{\underset{\mathrm{2H}}{}}{<}y &\implies& x+H\overset{\underset{\mathrm{H}}{}}{<}y+H & (\because x\overset{\underset{\mathrm{H}}{}}{=}y) \\
+x\overset{{\mathrm{2H}}{}}{<}y &\implies& x+H\overset{{\mathrm{H}}{}}{<}y+H & (\because x\overset{{\mathrm{H}}{}}{=}y) \\
                 &\implies& C_H^{-1}(x+H)<C_H^{-1}(y+H) & (\because C_H\mbox{ is already sorted})\\
                 &\implies& T_H^{-1}(x)<T_H^{-1}(y) & (\because \mbox{ by condition 3.})\\
                 &\implies& C_{2H}^{*-1}(x)<C_{2H}^{*-1}(y)   
 \end{matrix}
 $$
 
-**Case3.** $$x\overset{\underset{\mathrm{2H}}{}}{>}y$$인 경우.   
+**Case3.** $$x\overset{{\mathrm{2H}}{}}{>}y$$인 경우.   
 $$
 \begin{matrix}
-x\overset{\underset{\mathrm{2H}}{}}{>}y &\implies& x+H\overset{\underset{\mathrm{H}}{}}{>}y+H & (\because x\overset{\underset{\mathrm{H}}{}}{=}y) \\
+x\overset{{\mathrm{2H}}{}}{>}y &\implies& x+H\overset{{\mathrm{H}}{}}{>}y+H & (\because x\overset{{\mathrm{H}}{}}{=}y) \\
                 &\implies& C_H^{-1}(x+H)>C_H^{-1}(y+H) & (\because C_H\mbox{ is already sorted})\\
                 &\implies& T_H^{-1}(x)>T_H^{-1}(y) & (\because \mbox{ by condition 3.})\\
                 &\implies& C_{2H}^{*-1}(x)>C_{2H}^{*-1}(y)   
@@ -173,8 +189,8 @@ $$\quad G_{2H}[i] \gets g$$
    
 **Proof.**
 $$C_{2H}$$에서 인접한 두 접미사 $$x$$와 $$y$$에 대해
-$$x\overset{\underset{\mathrm{H}}{}}{\neq}y \implies x\overset{\underset{\mathrm{2H}}{}}{\neq}y$$ 이므로 $$G_H(x)\neq G_H(y)$$이라면 $$G_{2H}(x)=G_{2H}(y)+1$$ 임을 알 수 있다. 
-만약 $$x\overset{\underset{\mathrm{H}}{}}{=}y$$라면 $$L(x)$$와 $$L(y)$$모두 $$H$$이상이므로, $$x+H$$와 $$y+H$$의 값은 최대 $$n$$이다.   
+$$x\overset{{\mathrm{H}}{}}{\neq}y \implies x\overset{{\mathrm{2H}}{}}{\neq}y$$ 이므로 $$G_H(x)\neq G_H(y)$$이라면 $$G_{2H}(x)=G_{2H}(y)+1$$ 임을 알 수 있다. 
+만약 $$x\overset{{\mathrm{H}}{}}{=}y$$라면 $$L(x)$$와 $$L(y)$$모두 $$H$$이상이므로, $$x+H$$와 $$y+H$$의 값은 최대 $$n$$이다.   
 또한 모든 접미사는 서로 다르므로, $$x+H=y+H=n$$인 경우는 없다. 따라서 $$G_{2H}[n]=-1$$으로 정의하면, $$x+H$$와 $$y+H$$를 비교함으로써 $$x$$와 $$y$$가 다른 그룹에 속하는지 여부를 알 수 있다. 즉, $$G_H(x+H)\neq G_H(y+H) \implies G_{2H}(x)=G_{2H}(y)+1$$이다. 따라서 **Algorithm3.**는 $$G_{2H}$$를 올바르게 계산한다. ∎   
 
 > **Theorem5. (Complexity)**   
