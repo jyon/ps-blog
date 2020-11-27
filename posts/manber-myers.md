@@ -18,8 +18,8 @@
 |$$C_H(i)$$ | 접미사들을 앞에서부터 $$H$$ 글자를 기준으로 사전 순으로, 사전상 순서 같은 경우에는 긴 것 부터 나열했을 때, $$i$$번째 값 |
 |$$C_H^{-1}(i)$$ | $$C_H(x)=i$$일 때의 $$x$$ |
 |$$S_H(i)$$ | $$S[i...min(n-1,i+h-1)]$$ |
-|$$G_H(i)$$ | $$\{S_H(i) | 0 \leq i \leq n-1 \}$$ 에서 $$S_H(i)$$의 사전상 순서 (0-based) |
-|$$|G_H|$$ | $$|\{S_H(i) | 0 \leq i \leq n-1 \}|$$ |
+|$$G_H(i)$$ | $$\{S_H(0), S_H(1), ..., S_H(n-1)\}$$ 에서 $$S_H(i)$$의 사전상 순서 (0-based) |
+|$$\left\vert G_H\right\vert$$ | $$\{S_H(0), S_H(1), ..., S_H(n-1)\}$$ 의 크기 |
 |$$\overset{{\mathrm{H}}{}}{=}$$| $$i\overset{{\mathrm{H}}{}}{=}j \iff S_H(i)=S_H(j)$$ (lexicographically equal)|  
 |$$\overset{{\mathrm{H}}{}}{\neq}$$| $$i\overset{{\mathrm{H}}{}}{\neq}j \iff S_H(i)<S_H(j) \lor S_H(i)>S_H(j)$$ (lexicographically not equal)|  
 |$$\overset{{\mathrm{H}}{}}{<}$$| $$i\overset{{\mathrm{H}}{}}{<}j \iff S_H(i)<S_H(j)$$ (lexicographically less) |
@@ -66,7 +66,7 @@ $$\quad$$$$C_{2H}^*[I[G_H[T_H[j]]] \gets T_H[j]$$
 즉, 같은 $$G_H$$값을 가지게 하는 $$T_H[i]$$, $$T_H[j]$$가 있으면, $$i, j$$의 대소관계가 $$C_{2H}^*[x]=T_H[i]$$인 $$x$$와 $$C_{2H}^*[y]=T_H[j]$$인 $$y$$ 사이의 대소관계와 일치한다. 이를 안정한 정렬이라고 한다. 
 한편 $$T_H$$가 특정한 성질을 가지고 있다면, $$C_{2H}^*=C_{2H}$$가 된다.
 
-### Calculation of $$C_{2H}$$
+## Calculation of $$C_{2H}$$
 
 > **Lemma1.** 문자열 $$S[0...n-1]$$에서 $$L(i)<H $$이면 $$G_H(i)=G_H(j)$$인 $$j\neq i$$는 존재하지 않는다.   
     
@@ -118,7 +118,7 @@ $$
 
 따라서 $$C_{2H}^*=C_{2H}$$이다.∎   
 
-### Calculation of $$T_H$$
+## Calculation of $$T_H$$
 
 이제 **Themrem1.**의 조건을 만족하는 $$T_H$$를 계산하는 방법을 생각해 보자.
 
@@ -137,7 +137,7 @@ $$\qquad curr \gets curr+1$$
 이 알고리즘이 올바르게 작동한다는 사실을 다음과 같이 알 수 있다.
 
 > **Theorem2. (Correctness)**  
-**Algorithm2.**의 결과로 계산된 $$T_H$$는 **Theorem1.**의 조건을 만족한다.
+**Algorithm2**의 결과로 계산된 $$T_H$$는 **Theorem1**의 조건을 만족한다.
    
 **Proof.**    
 1. $$T_H\in \mathbb{F}$$   
@@ -162,13 +162,13 @@ $$
 따라서 $$u<v \implies a<b$$임을 보이면 된다. $$curr$$은 할당이 일어난 후 1만큼 증가하고, $$curr=u$$일 때 할당이 일어났으므로 $$u<v \implies a<b$$이다. ∎   
     
 > **Theorem3. (Complexity)**   
-**Algorithm2.**는 $$O(N)$$이다.
+**Algorithm2**는 $$O(N)$$이다.
 
 **Proof.** ∎
    
-따라서 **Algorithm2.**를 통해 **Theorem1.**의 조건을 만족하는 $$T_H$$를 $$O(N)$$에 계산할 수 있다.
+따라서 **Algorithm2**를 통해 **Theorem1**의 조건을 만족하는 $$T_H$$를 $$O(N)$$에 계산할 수 있다.
 
-### Calculation of $$G_{2H}$$   
+## Calculation of $$G_{2H}$$   
 다음으로 $$C_{2H}$$와 $$G_H$$로부터 $$G_{2H}$$를 계산하는 방법을 생각해보자.   
 
 > **Algorithm3. ($$G_{2H}$$ calculation)**   
@@ -185,7 +185,7 @@ $$\quad G_{2H}[i] \gets g$$
 **Note.** 이전 정렬에서 얻은 정보를 이용하여 두 접미사를 $$O(1)$$에 비교한다.   
 
 > **Theorem4. (Correctness)**   
-**Algorithm3.** 은 $$G_{2H}$$를 올바르게 구한다.   
+**Algorithm3** 은 $$G_{2H}$$를 올바르게 구한다.   
    
 **Proof.**
 $$C_{2H}$$에서 인접한 두 접미사 $$x$$와 $$y$$에 대해
@@ -194,7 +194,7 @@ $$x\overset{{\mathrm{H}}{}}{\neq}y \implies x\overset{{\mathrm{2H}}{}}{\neq}y$$ 
 또한 모든 접미사는 서로 다르므로, $$x+H=y+H=n$$인 경우는 없다. 따라서 $$G_{2H}[n]=-1$$으로 정의하면, $$x+H$$와 $$y+H$$를 비교함으로써 $$x$$와 $$y$$가 다른 그룹에 속하는지 여부를 알 수 있다. 즉, $$G_H(x+H)\neq G_H(y+H) \implies G_{2H}(x)=G_{2H}(y)+1$$이다. 따라서 **Algorithm3.**는 $$G_{2H}$$를 올바르게 계산한다. ∎   
 
 > **Theorem5. (Complexity)**   
-**Algorithm3.**의 시간 복잡도는 $$O(N)$$이다. 
+**Algorithm3**의 시간 복잡도는 $$O(N)$$이다. 
 
 **Proof.**∎
 
@@ -232,18 +232,18 @@ $$\qquad \quad g \gets g+1$$
 $$\qquad \quad G_{2H}[i] \gets g$$   
 $$\quad H \gets H \times 2$$   
    
-크게 $$T_H$$를 구하는 부분, 기수 정렬, $$G_{2H}$$를 구하는 부분으로 나뉜다. 앞서 **Themrem1.**, **Theorem2.**, **Theorem4.**로부터 각 부분이 올바르게 동작한다는 것을 보였다.  
+크게 $$T_H$$를 구하는 부분, 기수 정렬, $$G_{2H}$$를 구하는 부분으로 나뉜다. 앞서 **Themrem1**, **Theorem2**, **Theorem4**로부터 각 부분이 올바르게 동작한다는 것을 보였다.  
 또한, $$C_1$$과 $$G_1$$은 $$G_1[i]=S[i]$$, $$T_1[i]=i$$로 둔 후 기수 정렬을 하면 $$O(N)$$에 구할 수 있다.
 
 > **Theorem6. (Correctness)**   
-**Algorithm4.**는 올바른 접미사 배열을 구한다.   
+**Algorithm4**는 올바른 접미사 배열을 구한다.   
 
-**Proof.** **Theorem1.**, **Theorem2.**, **Theorem4.**로 부터 **while**문 내부는 올바르게 동작한다.
+**Proof.** **Theorem1**, **Theorem2**, **Theorem4**로 부터 **while**문 내부는 올바르게 동작한다.
 **while**문이 최대 $$\lceil log_{2} N\rceil$$ 번 실행되고 그 후에 $$C=C_N$$을 구할 수 있다.∎
 
 > **Theorem7. (Correctness)**   
-**Algorithm4.**은 $$O(N\log N)$$ 시간복잡도를 가진다.   
+**Algorithm4**는 $$O(N\log N)$$ 시간복잡도를 가진다.   
 
 **Proof.**   
-**while**문이 최대 $$\lceil log_{2} N\rceil$$ 번 실행되고, 반복문 내부는 $$O(N)$$ 시간복잡도를 가지는 기수정렬과, $$T_H$$를 구하는 부분, 마지막으로 $$G_{2H}$$를 구하는 부분으로 나뉜다. 각각은 **Theorem3.**, **Theorem5.** 으로부터 $$O(N)$$ 이므로 전체 시간복잡도는 $$O(N\log N)$$이 된다. ∎
+**while**문이 최대 $$\lceil log_{2} N\rceil$$ 번 실행되고, 반복문 내부는 $$O(N)$$ 시간복잡도를 가지는 기수정렬과, $$T_H$$를 구하는 부분, 마지막으로 $$G_{2H}$$를 구하는 부분으로 나뉜다. 각각은 **Theorem3**, **Theorem5** 으로부터 $$O(N)$$ 이므로 전체 시간복잡도는 $$O(N\log N)$$이 된다. ∎
 
