@@ -25,8 +25,20 @@
 |$$\overset{\mathrm{H}}{<}$$| $$i\overset{\mathrm{H}}{<}j \iff S_H(i)<S_H(j)$$ (lexicographically less) |
 |$$\overset{\mathrm{H}}{>}$$| $$i\overset{\mathrm{H}}{>}j \iff S_H(i)>S_H(j)$$ (lexicographically greater) |   
 
-$$\mathbb{F}$$에 속하는 함수들은 접미사에서 접미사로 대응되는 함수로 생각할 수 있다. 또한, $$G_H$$는 구현상의 편의를 위해 $$[0, n]\mapsto \mathbb{Z}$$ 으로 정의한다.
-다음의 몇 가지 간단한 사실이 성립한다.
+$$\mathbb{F}$$에 속하는 함수들은 접미사에서 접미사로 대응되는 함수로 생각할 수 있다.
+예를 들어,
+$$f(i)=\begin{cases}
+C(i)-2, & \mbox{if } i\geq 2\\
+C(i), & \mbox{if } i< 2
+\end{cases}
+$$   
+
+이런 함수가 있다고 하자. $$f(i)$$는 입력으로 받은 접미사 $$i$$의 길이가 2 이상이라면 앞의 2 글자를 제거한 접미사로 정의되고, 
+2 미만의 길이를 가진 접미사에 대해서는 $$i$$와 같은 접미사로 정의된다.
+한편 $$G_H\notin \mathbb{F}$$이다. 또한, $$n$$번째 글자에서 시작하는 접미사는 존재하지 않지만 구현상의 편의를 위해 $$G_H\in [0, n]\mapsto {-1,0}\cup \mathbb{N}$$ 이라고 하자.
+그 이유는 [**Calculation of $$G_H$$**](##calculation-of-$$g_h$$)에서 설명한다. 이 때 $$G_H(n)=-1$$으로 정의하자.
+이 외에도 다음의 몇 가지 성질이 성립한다.
+
 > **Fact1.**   
 $$C=C_N=C_{2^{\lceil \log_{2} N \rceil}}$$
 
@@ -197,7 +209,7 @@ $$x\overset{\mathrm{H}}{\neq}y \implies x\overset{\mathrm{2H}}{\neq}y$$ 이므�
 
 **Proof.**∎
 
-## Manber-Myers Algorithm
+## Put All Together 
 
 이상의 결과를 통해 $$O(N\log N)$$ 시간복잡도를 가지는 접미사 배열 생성 알고리즘을 다음과 같이 작성할 수 있다.
 
