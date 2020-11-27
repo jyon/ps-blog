@@ -1,17 +1,54 @@
 # Introduction
 
-| Symbol | Definition |
-|---|:---|
-|$$\mathbb{S}$$ | $$\mathbb{S}=[0, n-1]$$, 문자열 $$S[0...n-1]$$의 접미사들의 집합을 나타낸다. |
-|$$\mathbb{F}$$ | $$\mathbb{S} \mapsto \mathbb{S}$$ 이고 일대일 대응인 함수들의 집합  |
-|$$C(i)$$ | 접미사 배열의 $$i$$ 번째 값 |
-|$$C^{-1}(i)$$ | $$C(x)=i$$ 일 때 $$x$$ |
-|$$C_H(i)$$ | 접미사들을 앞에서부터 $$H$$ 글자를 기준으로 사전 순으로, 사전상 순서 같은 경우에는 긴 것 부터 나열했을 때, $$i$$번째 값 |
-|$$C_H^{-1}(i)$$ | $$C_H(x)=i$$일 때의 $$x$$ |
-|$$S_H(i)$$ | $$S[i...min(n-1,i+h-1)]$$ |
-|$$G_H(i)$$ | $$\{S_H(i) | 0 \leq i \leq n-1 \}$$ 에서 $$S_H(i)$$의 사전상 순서 (0-based) |
-|$$|G_H|$$ | $$|\{S_H(i) | 0 \leq i \leq n-1 \}|$$ |
-|$$\overset{\underset{\mathrm{H}}{}}{=}$$| $$i\overset{\underset{\mathrm{H}}{}}{=}j \iff S_H(i)=S_H(j)$$ (lexicographically equal)|  
-|$$\overset{\underset{\mathrm{H}}{}}{\neq}$$| $$i\overset{\underset{\mathrm{H}}{}}{\neq}j \iff S_H(i)<S_H(j) \lor S_H(i)>S_H(j)$$ (lexicographically not equal)|  
-|$$\overset{\underset{\mathrm{H}}{}}{<}$$| $$i\overset{\underset{\mathrm{H}}{}}{<}j \iff S_H(i)<S_H(j)$$ (lexicographically less) |
-|$$\overset{\underset{\mathrm{H}}{}}{>}$$| $$i\overset{\underset{\mathrm{H}}{}}{>}j \iff S_H(i)>S_H(j)$$ (lexicographically greater) |  
+## Suffix Array
+어떤 문자열 $$S[0...n-1]$$의 모든 접미사를 사전 순으로 정렬해 둔 것. 이 때 공간 및 계산 효율을 위해 접미사 $$S[i...]$$에 대응하는 정수 $$i$$로 표현한다.
+
+## Manber-Myers Algorithm
+맨버-마이어스의 알고리즘은 접미사들의 목록을 $$1, 2, ..., 2^k$$ 글자를 기준으로 여러 번 정렬하여 접미사 배열을 구하는 알고리즘이다. 
+핵심 아이디어는 $$H$$글자를 기준으로 두 문자열의 대소 관계를 알고 있을 때 $$2H$$글자 기준으로 같은 문자열들의 대소관계를 $$O(1)$$ 시간에 알 수 있다는 것이다. 
+이 알고리즘의 시간복잡도는 $$O(N\log^2 N)$$ 이다. 기수 정렬을 사용하면 $$O(N\log N)$$까지 개선할 수 있다. 이 글에서는 기수 정렬을 사용한 맨버-마이어스 알고리즘을 작성하고 그 정당성과 시간복잡도를 증명한다.
+
+## Notation
+이 글에서 사용할 기호들의 의미는 다음과 같다.
+
+$$\mathbb{F}$$에 속하는 함수들은 접미사에서 접미사로 대응되는 함수로 생각할 수 있다. 예를 들어 $$C_H \in \mathbb{F}$$ 이다. 한편, $$G_H$$는 구현상의 편의를 위해 $$[0, n]\mapsto \mathbb{Z}$$ 으로 생각하자.
+다음의 몇 가지 간단한 사실이 성립한다.
+> **Fact1.**   
+$$C=C_N=C_{2^{\lceil \log_{2} N \rceil}}$$
+
+**Proof.**  ∎    
+따라서 $$C_H$$를 구하는 과정을 최대 $$\lceil\log_{2} N\rceil$$번 수행하면 접미사 배열을 얻을 수 있다.
+
+> **Fact2.**   
+1. $$x\overset{\underset{\mathrm{H}}{}}{=}y \iff G_H(x)=G_H(y)$$   
+2. $$x\overset{\underset{\mathrm{H}}{}}{<}y \iff G_H(x)<G_H(y)$$   
+3. $$x\overset{\underset{\mathrm{H}}{}}{>}y \iff G_H(x)>G_H(y)$$   
+
+**Proof.**  ∎
+
+## Stable Radix Sort
+$$O(N\log N)$$ 시간복잡도를 가지는 맨버-마이어스 알고리즘의 핵심 아이디어는 안정한 기수 정렬을 통해 $$C_H$$로부터 $$C_{2H}$$를 $$O(N)$$에 계산할 수 있다는 것이다. 
+여기서 부터는 설명의 편의상 $$f:\mathbb{S}\mapsto \mathbb{S}$$인 함수 $$f$$가 마치 $$[0, n-1]$$에서 정의된 배열 $$f[0...n-1]$$인 것처럼 그 의미를 혼용하여 사용하겠다. 
+
+> **Algorithm1. (Radix sort)**   
+Input: $$T_H\in \mathbb{F}$$, $$G_H$$, $$|G_H|$$   
+Output: $$C_{2H}^*\in \mathbb{F}$$   
+>
+> **for** $$i$$ **in** $$[0,|G_H|+1]$$ **do**   
+$$\quad$$$$I[i] \gets 0$$   
+   
+> **for** $$i$$ **in** $$[0,n-1]$$ **do**    
+$$\quad$$Increase $$I[G_H[T_H[i]]]$$ by 1   
+   
+> **for** $$i$$ **in** $$[1,|G_H|+1]$$ **do**   
+$$\quad$$$$I[i] \gets I[i-1]+1$$   
+   
+> **for** $$i$$ **in** $$[0, n-1]$$ **do**   
+$$\quad$$$$j \gets n-1-i$$   
+$$\quad$$Decrease $$I[G_H[T_H[j]]]$$ by 1   
+$$\quad$$$$C_{2H}^*[I[G_H[T_H[j]]] \gets T_H[j]$$   
+   
+이 알고리즘의 정당성 및 시간복잡도가 $$O(N)$$이라는 사실의 증명은 생략한다. 기수 정렬의 정의에 의해 이 알고리즘이 수행되고 나면 $$C_{2H}^*[i]$$는 $$G_H[C_{2H}^*[i]]$$가 오름 차순이 되도록 정렬된다. 만약 $$i<j$$에 대해 $$G_H[T_H[i]]=G_H[T_H[j]]$$ 라면, $$C_{2H}^{*-1}[T_H[i]]<C_{2H}^{*-1}[T_H[j]]$$가 성립한다. 
+즉, 같은 $$G_H$$값을 가지게 하는 $$T_H[i]$$, $$T_H[j]$$가 있으면, $$i, j$$의 대소관계가 $$C_{2H}^*[x]=T_H[i]$$인 $$x$$와 $$C_{2H}^*[y]=T_H[j]$$인 $$y$$ 사이의 대소관계와 일치한다. 이를 안정한 정렬이라고 한다. 
+한편 $$T_H$$가 특정한 성질을 가지고 있다면, $$C_{2H}^*=C_{2H}$$가 된다.
+
