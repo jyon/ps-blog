@@ -19,6 +19,7 @@
 |$$S_H(i)$$ | $$S[i...\min(n-1,i+H-1)]$$ |
 |$$G_H(i)$$ | $$\{S_H(0), S_H(1), ..., S_H(n-1)\}$$ 에서 $$S_H(i)$$의 사전상 순서 (0-based) |
 |$$\left\vert G_H\right\vert$$ | $$\{S_H(0), S_H(1), ..., S_H(n-1)\}$$ 의 크기 |
+|$$L(i)$$ | $$n-i$$ 접미사 $$i$$의 길이 |
 |$$\overset{\mathrm{H}}{=}$$| $$i\overset{\mathrm{H}}{=}j \iff S_H(i)=S_H(j)$$ (lexicographically equal)|  
 |$$\overset{\mathrm{H}}{\neq}$$| $$i\overset{\mathrm{H}}{\neq}j \iff S_H(i)<S_H(j) \lor S_H(i)>S_H(j)$$ (lexicographically not equal)|  
 |$$\overset{\mathrm{H}}{<}$$| $$i\overset{\mathrm{H}}{<}j \iff S_H(i)<S_H(j)$$ (lexicographically less) |
@@ -71,10 +72,11 @@ $$\quad$$$$C_{2H}^*[I[G_H[T_H[j]]] \gets T_H[j]$$
 **Proof.**   
 $$G_H(i)=G_H(j) \land j\neq i \implies L(i)\geq H \land L(j)\geq H$$ 이어서 $$L(i)<H$$라는 조건에 모순이다. 따라서 $$G_H(i)=G_H(j)$$인 $$j\neq i$$는 존재하지 않는다.∎ 
    
-> **Theorem1. (Correctness)** $$C_H$$, $$G_H$$, $$|G_H|$$가 주어졌을 때, $$T_H$$가 다음 조건을 만족하면 **Algorithm1.**의 결과 $$C_{2H}^*=C_{2H}$$ 이다.
-1. $$T_H\in \mathbb{F}$$
-2. $$T_H[0] = N-H, T_H[1] = N-H+1, ..., T_H[H-1] = N-1$$
-3. $$C_H^{-1}(x+H)<C_H^{-1}(y+H) \implies T_H^{-1}(x)<T_H^{-1}(y)$$
+> **Theorem1. (Correctness)** $$C_H$$, $$G_H$$, $$|G_H|$$가 주어졌을 때, $$T_H$$가 다음 조건을 만족하면 **Algorithm1.**의 결과 $$C_{2H}^*=C_{2H}$$ 이다.   
+
+> 1. $$T_H\in \mathbb{F}$$   
+2. $$T_H[0] = N-H, T_H[1] = N-H+1, ..., T_H[H-1] = N-1$$   
+3. $$C_H^{-1}(x+H)<C_H^{-1}(y+H) \implies T_H^{-1}(x)<T_H^{-1}(y)$$   
    
 **Proof.**   
 서로 다른 두 접미사 $$x \in \mathbb{S}$$와 $$y \in \mathbb{S}$$에 대해 일반성을 잃지 않고 $$L(x)>L(y)$$라고 하자.
