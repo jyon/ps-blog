@@ -30,15 +30,17 @@
 |$$\overset{\mathrm{H}}{<}$$| $$i\overset{\mathrm{H}}{<}j \iff S_H(i)<S_H(j)$$ (lexicographically less) |
 |$$\overset{\mathrm{H}}{>}$$| $$i\overset{\mathrm{H}}{>}j \iff S_H(i)>S_H(j)$$ (lexicographically greater) |   
 
-$$\mathbb{F}$$에 속하는 함수들은 접미사에서 접미사로 대응되는 함수로 생각할 수 있다.
-예를 들어,
-$$f(i)=\begin{cases}
+$$\mathbb{F}$$에 속하는 함수들은 접미사에서 접미사로 대응되는 함수로 생각할 수 있다.  
+예를 들어
+$$
+f(i)=\begin{cases}
 C(i)+2, & \mbox{if } n-i\geq 2 \\
-C(i), & \mbox{if } i<2
+C(i), & \mbox{if } n-i<2
 \end{cases}
 $$   
 
-이런 함수가 있다고 하자. $$f(i)$$는 입력으로 받은 접미사 $$i$$의 길이가 2 이상이라면 앞의 2 글자를 제거한 접미사로 정의되고, 
+로 정의된 $$f(i)$$가 있다고 하자.  
+$$f(i)$$는 입력으로 받은 접미사 $$i$$의 길이가 2 이상이라면 앞의 2 글자를 제거한 접미사로 정의되고, 
 2 미만의 길이를 가진 접미사에 대해서는 $$i$$와 같은 접미사로 정의된다.
 한편 $$G_H\notin \mathbb{F}$$이다. 정의에 의해 $$G_H$$함수는 $$H$$글자 기준으로 두 접미사의 사전상 순서의 대소관계를 나타낸다. 
 같은 $$G_H$$값을 가지는 접미사들 끼리는 같은 그룹에 속한다고 하자. 같은 그룹에 속하는 접미사들의 개수를 해당 그룹의 크기라고 하자. 
@@ -199,7 +201,7 @@ $$
 
 **Proof.** ∎
    
-## Calculation of 2H-Sized Group$$   
+## Calculation of 2H-Sized Group  
 
 다음으로 $$C_{2H}$$와 $$G_H$$로부터 $$G_{2H}$$를 계산하는 방법을 생각해보자.   
 
