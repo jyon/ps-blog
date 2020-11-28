@@ -243,7 +243,7 @@ $$x\overset{\mathrm{H}}{\neq}y \implies x\overset{\mathrm{2H}}{\neq}y$$ 이므�
 > **Algorithm4. (Manber-Myers alg.)**   
 Input: String $$S$$    
 Output: Suffix array $$C$$    
-Initialize $$C$$ to $$C_1$$, $$G$$ to $$G_1$$, $$\max (G)$$ to $$max (\Sigma )$$    
+Initialize $$C$$ to $$C_1$$, $$G$$ to $$G_1$$, $$\max (G)$$ to $$\max (\Sigma )$$    
 $$H \gets 1$$    
 $$g \gets 0$$   
 
@@ -273,7 +273,7 @@ $$\quad H \gets H \times 2$$
 이 알고리즘은 크게 $$P_H$$를 구하는 부분, 기수 정렬, $$G_{2H}$$를 구하는 부분으로 나뉜다. 
 앞서 **Themrem1**, **Theorem2**, **Theorem4**로부터 각 부분이 올바르게 동작한다는 것을 보였다.   
 초기화 부분은 $$G_1[i]=S[i]$$, $$T_1[i]=i$$로 둔 후 기수 정렬을 하면 된다. 
-단, $$G_1=S[i]$$로 초기화 하기 때문에 기수 정렬의 시간 복잡도가 문자열에 포함된 문자들의 집합 $$\Sigma$$에 대해 $$O(\max(N, max(\Sigma )))$$가 된다. 
+단, $$G_1=S[i]$$로 초기화 하기 때문에 기수 정렬의 시간 복잡도가 문자열에 포함된 문자들의 집합 $$\Sigma$$에 대해 $$O(\max(N, \max (\Sigma )))$$가 된다. 
 대부분의 경우 사실상 $$O(N)$$이라고 봐도 무방하다. 
 만약 그렇지 않다면 $$\Sigma$$의 원소들을 그 크기순으로 번호를 붙여서 문자열의 각 문자에 해당하는 번호로 그룹을 짓는 방법을 사용하면 된다.  
 또 $$radixSort$$에서 $$\max (G_H)$$에 항상 $$N$$을 넣는데, 이는 초기화 과정의 정렬을 제외하면 $$G_H$$의 최대값이 $$N$$이기 때문이다.
@@ -283,14 +283,14 @@ $$\quad H \gets H \times 2$$
 **Algorithm4**는 올바른 접미사 배열을 구한다.   
 
 **Proof.** **Theorem1**, **Theorem2**, **Theorem4**로 부터 **while**문 내부는 올바르게 동작한다.
-**while**문이 1번 실행될 때마다 $$H$$가 2배가 되므로 최대 $$\lceil log_{2} N\rceil$$ 번 실행되면 $$C=C_N$$을 구할 수 있다.∎
+**while**문이 1번 실행될 때마다 $$H$$가 2배가 되므로 최대 $$\lceil \log_{2} N\rceil$$ 번 실행되면 $$C=C_N$$을 구할 수 있다.∎
 
 > **Theorem7. (Complexity)**   
 **Algorithm4**는 $$O(N\log N)$$ 시간 복잡도를 가진다.   
 
 **Proof.**   
 $$C_1$$와 $$G_1$$을 계산하는 초기화 부분은 1번의 기수 정렬로 $$O(N)$$에 해결할 수 있다. 
-**while**문은 최대 $$\lceil log_{2} N\rceil$$ 번 실행된다. 
+**while**문은 최대 $$\lceil \log_{2} N\rceil$$ 번 실행된다. 
 그 내부는 $$O(N)$$ 시간 복잡도를 가지는 기수정렬과, $$P_H$$를 구하는 부분, 마지막으로 $$G_{2H}$$를 구하는 부분으로 나뉜다.  
 각각은 **Theorem3**, **Theorem5** 으로부터 $$O(N)$$ 이므로 전체 시간 복잡도는 $$O(N\log N)$$이 된다. 
 ∎
